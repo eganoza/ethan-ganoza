@@ -3,8 +3,8 @@
 Welcome to my portfolio repository! I am an undergraduate student at the University of Hawaii at Mānoa studying Finance and MIS.
 
 ## About Me
-* **Focus:** International Financial Management, Foreign Exchange (FX) Risk & Hedging, and Corporate Finance.
-* **Education:** B.B.A. in Finance — Shidler College of Business, University of Hawaii at Mānoa.
+* **Focus:** International Financial Management, Foreign Exchange (FX) Risk & Hedging, Financial Technology
+* **Education:** B.B.A. Canidate in Finance & MIS — Shidler College of Business, University of Hawaii at Mānoa.
 * **Technical Skills:** Financial Modeling, Excel, and AI-Assisted Financial Analysis.
 
 ## Current Projects
