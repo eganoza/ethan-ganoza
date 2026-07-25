@@ -1,9 +1,9 @@
 # AI Prompt Log — Phase 0
 
-### Prompt 1: Portfolio Repository Directory Structure Setup
-> **User Prompt:** Provided assignment instructions for Phase 0 (FIN 321) requiring a canonical folder skeleton and stub README files.
-> **AI Response:** Generated automated Mac Zsh shell commands (`mkdir -p` and `touch`) to build subdirectories (`docs/`, `models/`, `data/`, `analysis/`) and populate stub README text across all folders.
+### Prompt 1: Portfolio Folder Setup
+> **User Prompt:** "What Terminal commands can I run on Mac to create the portfolio folders and stub README files?"
+> **AI Response:** Provided shell commands (`mkdir -p` and `touch`) to build the subdirectories (`docs/`, `models/`, `data/`, `analysis/`) and add stub text into every `README.md`.
 
-### Prompt 2: Bio & Resume Markdown Formatting
-> **User Prompt:** Submitted raw text resume containing contact information, 3.91 GPA, DAP mentorship, Kawakami & Wong LLC internship, awards, and community service.
-> **AI Response:** Converted raw text into professional Markdown format for `README.md` (Bio), `RESUME.md` (Formatted Resume), and `prompt-log.md` (Audit Log) adhering to portfolio guidelines.
+### Prompt 2: Bio & Resume Markdown Formatting Help
+> **User Prompt:** "Here is my bio details and raw text resume. Help me format them into clean, professional Markdown for my portfolio repository's README.md and RESUME.md files."
+> **AI Response:** Generated formatted Markdown structures for `README.md` and `RESUME.md`, which I then reviewed, customized, and saved to the repo.
