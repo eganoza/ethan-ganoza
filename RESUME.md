@@ -1,5 +1,5 @@
 # Ethan Kainalu Ganoza
-Foster City, CA 94404 · (650) 730-4575 · ethan.ganoza@gmail.com · [hawaii.edu Email]
+Foster City, CA 94404 · (650) 730-4575 · ethan.ganoza@gmail.com · eganoza@hawaii.edu
 
 ---
 
