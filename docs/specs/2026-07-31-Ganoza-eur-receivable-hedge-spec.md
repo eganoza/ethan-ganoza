@@ -20,7 +20,7 @@ All ten names below are mandatory and must be created as named ranges attached t
 |-------------|-------------|------:|------------:|
 | FC_AMT | Foreign‑currency receivable | EUR | 4,500,000 (placeholder) |
 | S0_in | Spot rate at inception | USD per EUR | 1.10 (placeholder) |
-| F0_in | Forward rate | USD per EUR | 1.0875 (placeholder) |
+| F0_in | Forward rate | USD per EUR | 1.1194 (placeholder — parity-implied from interest rates: S0 × (1+R_USD×T/360)/(1+R_FC×T/360) ≈ 1.1195) |
 | R_USD | USD nominal annual interest rate | decimal (annual) | 0.035 (3.5%) (placeholder) |
 | R_FC | Foreign (EUR) nominal annual interest rate | decimal (annual) | 0.015 (1.5%) (placeholder) |
 | K_PUT | Put option strike | USD per EUR | 1.00 (placeholder) |
