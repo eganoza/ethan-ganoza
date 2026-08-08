@@ -122,3 +122,19 @@ Parity check result: $11,571 difference < $45,000 tolerance. ✓ PASS
 ---
 
 End of Stage 3 log.
+
+---
+
+## Stage 3 Rebuild — 2026-08-07
+
+**Reason:** The Stage 2 specification was corrected after the initial workbook build. The prior workbook still used `F0_in = 1.1194`, a proceeds-based parity check with a $45,000 tolerance, and an incorrectly labeled receivable-call schedule.
+
+**Rebuild requirements:**
+
+- Use `F0_in = 1.1220`, the rounded result of `F_implied = 1.1219714071`.
+- Set `PARITY_CHECK = F0_in − F_implied` and `CHECK_TOLERANCE = 0.0001 USD/EUR`.
+- Retain the call only as an EUR-payable reference; exclude it from the receivable recommendation and sensitivity chart.
+- Add `USD_NO_HEDGE = FC_AMT × S_T` to the sensitivity table and chart.
+- Add `FORW_MM_PROCEEDS_DIFF` as a separate rounding diagnostic.
+
+**Verification result:** The rebuilt workbook passed formula-error scanning and visual inspection. The forward / money-market proceeds difference is $129, consistent with rounding `F0_in` to four decimals; the rate parity difference is 0.0000285929 USD/EUR, inside the 0.0001 tolerance. See `analysis/2026-07-31-Ganoza-build-audit.md` for the complete audit.
