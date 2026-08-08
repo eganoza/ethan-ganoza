@@ -48,6 +48,7 @@ Notes: Units and placeholder sources must be documented: Stage‑4 sourcing will
 - Rate basis: ACT/360 (use T_DAYS/360 in interest calculations)
 - Interest compounding: simple interest over the settlement period (no intra‑period compounding) consistent with the MM flow formulas
 - Premiums: PREM_* are expressed in USD per EUR and are treated as upfront cash costs deducted from net proceeds in USD
+- Put-strike decision: `K_PUT = 1.00` with `PREM_PUT = 0.02` produces a net USD floor of $4,410,000 on the €4.5M receivable. This accepts a $0.10/EUR decline from `S0_in = 1.10` before the floor binds; the strike must be selected based on the business's required USD floor and documented as a risk-tolerance decision.
 - Transaction costs: ignored unless specified; document if added
 - Dates: use ISO format (YYYY‑MM‑DD) in Cover and Inputs
 
