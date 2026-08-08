@@ -20,7 +20,7 @@ All ten names below are mandatory and must be created as named ranges attached t
 |-------------|-------------|------:|------------:|
 | FC_AMT | Foreign‑currency receivable | EUR | 4,500,000 (placeholder) |
 | S0_in | Spot rate at inception | USD per EUR | 1.10 (placeholder) |
-| F0_in | Forward rate | USD per EUR | 1.1194 (placeholder — parity-implied from interest rates: S0 × (1+R_USD×T/360)/(1+R_FC×T/360) ≈ 1.1195) |
+| F0_in | Forward rate | USD per EUR | 1.1220 (placeholder — parity-implied from interest rates: S0 × (1+R_USD×T/360)/(1+R_FC×T/360) ≈ 1.1220) |
 | R_USD | USD nominal annual interest rate | decimal (annual) | 0.035 (3.5%) (placeholder) |
 | R_FC | Foreign (EUR) nominal annual interest rate | decimal (annual) | 0.015 (1.5%) (placeholder) |
 | K_PUT | Put option strike | USD per EUR | 1.00 (placeholder) |
@@ -38,7 +38,7 @@ Notes: Units and placeholder sources must be documented: Stage‑4 sourcing will
 - Inputs — all named inputs laid out with cells colored Yellow/Blue as appropriate and named ranges attached
 - Forwards — single‑line forward calculation and detailed summary outputs
 - MoneyMarket — three explicit steps (borrow FC, convert at spot, invest USD) with each step a visible row/cell
-- Options — put and call payoff tables across S_T scenarios, premiums and net proceeds
+- Options — EUR-receivable put payoff table across S_T scenarios, premiums and net proceeds; separate EUR-payable call reference table if retained
 - Sensitivity — ±5% in 1% steps around S0_in (formula‑driven table and chart)
 - Checks — parity check and other validation rules (§7) visible and passing
 - Notes — assumptions, data provenance, and references
@@ -68,30 +68,30 @@ B. Money‑market hedge (three visible steps)
   (Invest USD now at R_USD until settlement; USD proceeds at settlement)
 - Output name: MM_PROCEEDS
 
-C. Options (put and call)
+C. Options
 - Define S_T scenarios (see §6 Sensitivity) as S_T = S0_in × (1 + pct_change)
 - Put gross proceeds at settlement = FC_AMT × max(S_T, K_PUT)
 - Put net proceeds = (FC_AMT × max(S_T, K_PUT)) − (FC_AMT × PREM_PUT)
-- Call gross proceeds at settlement = FC_AMT × max(S_T, K_CALL) (or, for the standard seller/holder logic, mirror notation — specify the desired payoff; here we’ll include call payoff for comparison)
-- Call net proceeds = (FC_AMT × max(S_T, K_CALL)) − (FC_AMT × PREM_CALL)
-- Output names: PUT_PROCEEDS_NET, CALL_PROCEEDS_NET
+- A long EUR call is not a hedge for this EUR receivable. If retained for comparison, display it only as an EUR-payable reference: call payoff = FC_AMT × max(S_T − K_CALL, 0); CALL_PAYABLE_COST = FC_AMT × S_T − call payoff + (FC_AMT × PREM_CALL). Do not include it in the receivable recommendation or net-proceeds chart.
+- Output names: PUT_PROCEEDS_NET; CALL_PAYABLE_COST (reference only, if the call table is retained)
 
 D. Parity / validation formula
 - F_implied = S0_in × (1 + R_USD × T_DAYS/360) / (1 + R_FC × T_DAYS/360)
-- Parity_check = FORW_PROCEEDS − MM_PROCEEDS (numeric difference)
-- Validation rule: ABS(Parity_check) < tolerance (tolerance = 0.01 × FC_AMT or numeric rounding threshold; specify as a cell CHECK_TOLERANCE in the workbook)
+- PARITY_CHECK = F0_in − F_implied (USD per EUR)
+- FORW_MM_PROCEEDS_DIFF = FORW_PROCEEDS − MM_PROCEEDS (USD; diagnostic output)
+- Validation rule: ABS(PARITY_CHECK) <= CHECK_TOLERANCE, where CHECK_TOLERANCE is 0.0001 USD per EUR. This checks the quoted forward against parity directly; the USD proceeds difference is reported separately.
 
 6. Sensitivity plan
 
 - Create S_T grid: pct_change from −5% to +5% in increments of 1% (i.e., −0.05, −0.04, …, 0.05)
 - Compute S_T = S0_in × (1 + pct_change) for each row
-- For each S_T, compute FORW_PROCEEDS (note: forward proceeds do not depend on S_T), MM_PROCEEDS (depends indirectly via S0_in only), PUT_PROCEEDS_NET, CALL_PROCEEDS_NET
-- Chart: line chart comparing net USD proceeds for Forward, MM, Put, Call across S_T range
+- For each S_T, compute USD_NO_HEDGE = FC_AMT × S_T, FORW_PROCEEDS (note: forward proceeds do not depend on S_T), MM_PROCEEDS (depends indirectly via S0_in only), and PUT_PROCEEDS_NET
+- Chart: line chart comparing USD proceeds for No hedge, Forward, MM, and Put across S_T range. Exclude the payable-reference call series.
 
 7. Validation rules (§7 checks) — explicit check figures
 
 Include visible cells labeled with the check name and the expected relationship:
-- Parity_check passes: ABS(FORW_PROCEEDS − MM_PROCEEDS) <= CHECK_TOLERANCE
+- Parity check passes: ABS(PARITY_CHECK) <= CHECK_TOLERANCE; display FORW_MM_PROCEEDS_DIFF separately as a diagnostic
 - All summary outputs are formulas (no pasted numbers) — flagged in a sheet check (ISFORMULA test per output cell)
 - Sensitivity recalculation: changing S0_in updates S_T table and all downstream outputs automatically
 
@@ -100,9 +100,11 @@ Include visible cells labeled with the check name and the expected relationship:
 Summary outputs in gray cells, each with a named range:
 - FORW_PROCEEDS
 - MM_PROCEEDS
+- USD_NO_HEDGE
 - PUT_PROCEEDS_NET
-- CALL_PROCEEDS_NET
+- CALL_PAYABLE_COST (reference only, if retained)
 - PARITY_CHECK
+- FORW_MM_PROCEEDS_DIFF
 - CHECK_TOLERANCE (input/assumption cell)
 
 9. Prompt‑log evidence requirement
