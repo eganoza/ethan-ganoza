@@ -125,6 +125,12 @@ End of Stage 3 log.
 
 ---
 
+## Stage 4 — Market Data Population (2026-08-07)
+
+Used ECB EUR/USD reference data, FRED DGS1, and the ECB deposit-facility rate to populate the workbook; calculated a CIP-implied forward and reconciled the outputs with the course FX Hedging Lab. Full sources, timestamps, proxy rationale, and reconciliation are recorded in `data/2026-08-07-Ganoza-market-data.md`.
+
+---
+
 ## Stage 3 Rebuild — 2026-08-07
 
 **Reason:** The Stage 2 specification was corrected after the initial workbook build. The prior workbook still used `F0_in = 1.1194`, a proceeds-based parity check with a $45,000 tolerance, and an incorrectly labeled receivable-call schedule.
