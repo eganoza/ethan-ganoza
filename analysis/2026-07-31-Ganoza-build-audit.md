@@ -9,7 +9,7 @@
 
 ## Scope
 
-This audit replaces the earlier Stage 3 note. The earlier workbook reflected the superseded Stage 2 design (including `F0_in = 1.1194`, a loose proceeds-based parity control, and a call shown as receivable proceeds). The rebuilt workbook follows the current committed specification.
+This audit replaces the earlier Stage 3 note. That version of the workbook followed an older Stage 2 design: it used `F0_in = 1.1194`, a loose proceeds-based parity control, and a call shown as receivable proceeds. The rebuilt workbook follows the current committed specification.
 
 ## Checks Performed
 
@@ -30,4 +30,4 @@ The `Checks` tab includes Excel `ISFORMULA` controls for the forward, money-mark
 
 ## Stage 4 Readiness
 
-The workbook is ready for live-market-data population. All current market inputs remain explicitly labeled as placeholders. Stage 4 must document the as-of date, source, quote convention, and any forward basis or bid/ask spread before a recommendation is made.
+The workbook is ready for live-market-data population. The current market inputs are clearly labeled as placeholders. For Stage 4, I need to document the as-of date, source, quote convention, and any forward basis or bid/ask spread before making a recommendation.
